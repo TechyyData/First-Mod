@@ -8,6 +8,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
+import techyydata.firstmod.helpers.LogHelper;
 import techyydata.firstmod.proxy.CommonProxy;
 
 import org.apache.logging.log4j.core.Logger;
@@ -17,11 +18,12 @@ public class FirstMod {
     @Mod.Instance(Reference.MOD_ID)
     public static FirstMod INSTANCE;
 
-    @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.COMMON_PROXY)
+    @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.COMMON_PROXY_CLASS)
     private static CommonProxy proxy;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        LogHelper.setLogger(event.getModLog());
         proxy.preInit(event);
     }
 
